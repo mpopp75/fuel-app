@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fuel</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="fuel_amount_in_liters">Fuel amount in liters</string>
+    <string name="price_per_liter_in_eur">Price per liter in €</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+</resources>
