@@ -10,9 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
     private EditText etPriceLiter;
 
     private Button bnSave;
-    private Button bnReset;
 
     DatePickerDialog datePickerDialog;
 
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
         etAmountFuel = findViewById(R.id.etFuelAmount);
         etPriceLiter = findViewById(R.id.etPriceLiter);
         bnSave = findViewById(R.id.bnCSave);
-        bnReset = findViewById(R.id.bnReset);
+        Button bnReset = findViewById(R.id.bnReset);
 
         LocalDate dt = LocalDate.now();
         DateTimeFormatter ft = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -56,12 +53,9 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
         Log.d(this.getClass().getSimpleName(), "currentDate: " + currentDate);
         etDate.setText(currentDate);
 
-        etDate.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                showDatePickerDialog();
-                return true;
-            }
+        etDate.setOnTouchListener((View v, MotionEvent event) -> {
+            showDatePickerDialog();
+            return true;
         });
 
         etDate.addTextChangedListener(textWatcher);
@@ -88,19 +82,16 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
             }
         });
 
-        bnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LocalDate dt = LocalDate.now();
-                DateTimeFormatter ft = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                String currentDate = dt.format(ft);
-                etDate.setText(currentDate);
-                etKilometers.setText("");
-                etAmountFuel.setText("");
-                etPriceLiter.setText("");
+        bnReset.setOnClickListener(v -> {
+            LocalDate dt1 = LocalDate.now();
+            DateTimeFormatter ft1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String currentDate1 = dt1.format(ft1);
+            etDate.setText(currentDate1);
+            etKilometers.setText("");
+            etAmountFuel.setText("");
+            etPriceLiter.setText("");
 
-                updateListView();
-            }
+            updateListView();
         });
 
         updateListView();
@@ -116,15 +107,12 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
     private void showDatePickerDialog() {
         datePickerDialog = new DatePickerDialog(
                 MainActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etDate.setText(String.format("%04d", year) + "-" +
-                                       String.format("%02d", (month + 1)) + "-" +
-                                       String.format("%02d", dayOfMonth));
+                (view, year, month, dayOfMonth) -> {
+                    etDate.setText(String.format("%04d", year) + "-" +
+                                   String.format("%02d", (month + 1)) + "-" +
+                                   String.format("%02d", dayOfMonth));
 
-                        MainActivity.this.datePickerDialog.dismiss();
-                    }
+                    MainActivity.this.datePickerDialog.dismiss();
                 },
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
@@ -163,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements HttpPostRequest.H
             // do this after text is changed
 
             bnSave.setEnabled(etDate.getText().toString().matches("\\d{4}-\\d{2}-\\d{2}$") &&
-                    etKilometers.getText().toString().matches("^\\d+(\\.\\d{0,1})?$") &&
+                    etKilometers.getText().toString().matches("^\\d+(\\.\\d?)?$") &&
                     etAmountFuel.getText().toString().matches("^\\d+(\\.\\d{0,2})?$") &&
                     etPriceLiter.getText().toString().matches("^\\d+(\\.\\d{0,3})?$"));
         }
