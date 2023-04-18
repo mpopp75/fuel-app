@@ -36,7 +36,6 @@ public class ListItemAdapter extends ArrayAdapter<JSONObject> {
 
         TextView tvDate = listItem.findViewById(R.id.tvDate);
         TextView tvKilometers = listItem.findViewById(R.id.tvKilometers);
-        TextView tvKilometersTotal = listItem.findViewById(R.id.tvKilometersTotal);
         TextView tvFuelLiters = listItem.findViewById(R.id.tvFuelLiters);
         TextView tvPriceEuroLiter = listItem.findViewById(R.id.tvPriceEuroLiter);
         TextView tvTotalPrice = listItem.findViewById(R.id.tvTotalPrice);
@@ -47,11 +46,8 @@ public class ListItemAdapter extends ArrayAdapter<JSONObject> {
             String dt = fuel.getString("dt");
             tvDate.setText(dt);
 
-            String kilometers = fuel.getString("kilometers");
+            String kilometers = fuel.getString("kilometers") + " / " + fuel.getString("kilometers_total");
             tvKilometers.setText(kilometers);
-
-            String kilometers_total = fuel.getString("kilometers_total");
-            tvKilometersTotal.setText(kilometers_total);
 
             String fuel_liters = fuel.getString("fuel_liters");
             tvFuelLiters.setText(fuel_liters);
