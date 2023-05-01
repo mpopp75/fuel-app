@@ -13,8 +13,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Date"
+        android:hint="@string/date"
         android:inputType="date"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,16 +59,6 @@
         app:layout_constraintTop_toBottomOf="@+id/etFuelAmount" />
 
     <Button
-        android:id="@+id/bnCSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="@+id/etPriceLiter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etFuelAmount"
-        app:layout_constraintTop_toTopOf="@+id/etFuelAmount" />
-
-    <Button
         android:id="@+id/bnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,13 +68,23 @@
         app:layout_constraintStart_toEndOf="@+id/etDate"
         app:layout_constraintTop_toTopOf="@+id/etDate" />
 
+    <Button
+        android:id="@+id/bnCSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="@+id/etPriceLiter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etFuelAmount"
+        app:layout_constraintTop_toTopOf="@+id/etFuelAmount" />
+
     <TextView
         android:id="@+id/tvHDate"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Date"
+        android:layout_marginTop="32dp"
+        android:text="@string/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -92,8 +93,8 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="km"
+        android:layout_marginTop="32dp"
+        android:text="@string/km"
         app:layout_constraintStart_toEndOf="@+id/tvHDate"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -102,8 +103,8 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Liters"
+        android:layout_marginTop="32dp"
+        android:text="@string/liters"
         app:layout_constraintStart_toEndOf="@+id/tvHKilometers"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -112,8 +113,8 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="€/l"
+        android:layout_marginTop="32dp"
+        android:text="@string/euro_per_l"
         app:layout_constraintStart_toEndOf="@+id/tvHFuelLiters"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -122,8 +123,8 @@
         android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Price"
+        android:layout_marginTop="32dp"
+        android:text="@string/price"
         app:layout_constraintStart_toEndOf="@+id/tvHPriceEuroLiter"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -132,8 +133,8 @@
         android:layout_width="68dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Cons."
+        android:layout_marginTop="32dp"
+        android:text="@string/cons"
         app:layout_constraintStart_toEndOf="@+id/tvHTotalPrice"
         app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
@@ -141,20 +142,11 @@
         android:id="@+id/lvOutput"
         android:layout_width="409dp"
         android:layout_height="508dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvHDate"
-        tools:layout_editor_absoluteX="1dp" >
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHDate">
 
     </ListView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/confirmation_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
