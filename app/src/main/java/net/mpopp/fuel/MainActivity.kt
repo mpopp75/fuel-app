@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONException
@@ -118,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onError(e: Exception) {
                 Log.e(this.javaClass.simpleName, "Exception: $e")
+                Toast.makeText(this@MainActivity, "Connection error", Toast.LENGTH_LONG).show()
             }
         })
     }
