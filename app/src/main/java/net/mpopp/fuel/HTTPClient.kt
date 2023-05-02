@@ -1,4 +1,4 @@
-package net.mpopp.httpclienttest
+package net.mpopp.fuel
 
 import kotlinx.coroutines.*
 import java.io.*

@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import net.mpopp.httpclienttest.HttpClient
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
