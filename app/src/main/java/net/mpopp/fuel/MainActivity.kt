@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import net.mpopp.fuel.HttpPostRequest.HttpPostRequestCallback
+import net.mpopp.httpclienttest.HttpClient
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -18,7 +18,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
-class MainActivity : AppCompatActivity(), HttpPostRequestCallback {
+class MainActivity : AppCompatActivity() {
     private var etDate: EditText? = null
     private var etKilometers: EditText? = null
     private var etAmountFuel: EditText? = null
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(), HttpPostRequestCallback {
         etAmountFuel = findViewById(R.id.etFuelAmount)
         etPriceLiter = findViewById(R.id.etPriceLiter)
         bnSave = findViewById(R.id.bnCSave)
+        bnSave!!.isEnabled = false
 
         val bnReset = findViewById<Button>(R.id.bnReset)
         val dt = LocalDate.now()
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity(), HttpPostRequestCallback {
             val dt1 = LocalDate.now()
             val ft1 = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val currentDate1 = dt1.format(ft1)
+
             etDate!!.setText(currentDate1)
             etKilometers!!.setText("")
             etAmountFuel!!.setText("")
@@ -104,13 +106,24 @@ class MainActivity : AppCompatActivity(), HttpPostRequestCallback {
     }
 
     private fun updateListView() {
-        val request = HttpPostRequest(this, Config.url)
-        request.setParameter("key", Config.key)
-        request.setParameter("action", "get_data")
-        request.execute()
+        val client = HttpClient("https://var.mpopp.net/fuel/app_fuel.php")
+        val params = mapOf(
+            "key" to Config.key,
+            "action" to "get_data"
+        )
+
+        client.post(params, object : HttpClient.Callback {
+            override fun onSuccess(response: String) {
+                processListViewData(response)
+            }
+
+            override fun onError(e: Exception) {
+                Log.e(this.javaClass.simpleName, "Exception: $e")
+            }
+        })
     }
 
-    override fun onRequestComplete(result: String?) {
+    private fun processListViewData(result: String?) {
         Log.d(this.javaClass.simpleName, "result: $result")
         try {
             val json = JSONArray(result)

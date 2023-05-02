@@ -1,152 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/etDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/date"
-        android:inputType="date"
-        android:focusable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
 
-    <EditText
-        android:id="@+id/etKilometers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/kilometers"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDate" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
-    <EditText
-        android:id="@+id/etFuelAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/fuel_amount_in_liters"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etKilometers" />
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
 
-    <EditText
-        android:id="@+id/etPriceLiter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/price_per_liter_in_eur"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFuelAmount" />
+            app:toolbarId="@+id/toolbar">
 
-    <Button
-        android:id="@+id/bnReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reset"
-        app:layout_constraintBottom_toBottomOf="@+id/etKilometers"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etDate"
-        app:layout_constraintTop_toTopOf="@+id/etDate" />
 
-    <Button
-        android:id="@+id/bnCSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="@+id/etPriceLiter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etFuelAmount"
-        app:layout_constraintTop_toTopOf="@+id/etFuelAmount" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#CCCCCC" />
 
-    <TextView
-        android:id="@+id/tvHDate"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="268dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="10dp"
+                android:text="@string/mpopp_s_fuel_app"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvHKilometers"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/km"
-        app:layout_constraintStart_toEndOf="@+id/tvHDate"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="280dp"
+                android:paddingTop="20dp"
+                android:text="@string/version" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tvHFuelLiters"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/liters"
-        app:layout_constraintStart_toEndOf="@+id/tvHKilometers"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <TextView
-        android:id="@+id/tvHPriceEuroLiter"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/euro_per_l"
-        app:layout_constraintStart_toEndOf="@+id/tvHFuelLiters"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
 
-    <TextView
-        android:id="@+id/tvHTotalPrice"
-        android:layout_width="44dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/price"
-        app:layout_constraintStart_toEndOf="@+id/tvHPriceEuroLiter"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <TextView
-        android:id="@+id/tvHConsumption"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/cons"
-        app:layout_constraintStart_toEndOf="@+id/tvHTotalPrice"
-        app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/lvOutput"
-        android:layout_width="409dp"
-        android:layout_height="508dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHDate">
+            <EditText
+                android:id="@+id/etDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/date"
+                android:inputType="date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </ListView>
+            <EditText
+                android:id="@+id/etKilometers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/kilometers"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDate" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/etFuelAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/fuel_amount_in_liters"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etKilometers" />
+
+            <EditText
+                android:id="@+id/etPriceLiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/price_per_liter_in_eur"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etFuelAmount" />
+
+            <Button
+                android:id="@+id/bnReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                app:layout_constraintBottom_toBottomOf="@+id/etKilometers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etDate"
+                app:layout_constraintTop_toTopOf="@+id/etDate" />
+
+            <Button
+                android:id="@+id/bnCSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="@+id/etPriceLiter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etFuelAmount"
+                app:layout_constraintTop_toTopOf="@+id/etFuelAmount" />
+
+            <TextView
+                android:id="@+id/tvHDate"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <TextView
+                android:id="@+id/tvHKilometers"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/km"
+                app:layout_constraintStart_toEndOf="@+id/tvHDate"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <TextView
+                android:id="@+id/tvHFuelLiters"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/liters"
+                app:layout_constraintStart_toEndOf="@+id/tvHKilometers"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <TextView
+                android:id="@+id/tvHPriceEuroLiter"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/euro_per_l"
+                app:layout_constraintStart_toEndOf="@+id/tvHFuelLiters"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <TextView
+                android:id="@+id/tvHTotalPrice"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/price"
+                app:layout_constraintStart_toEndOf="@+id/tvHPriceEuroLiter"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <TextView
+                android:id="@+id/tvHConsumption"
+                android:layout_width="68dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/cons"
+                app:layout_constraintStart_toEndOf="@+id/tvHTotalPrice"
+                app:layout_constraintTop_toBottomOf="@+id/etPriceLiter" />
+
+            <ListView
+                android:id="@+id/lvOutput"
+                android:layout_width="409dp"
+                android:layout_height="508dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvHDate">
+
+            </ListView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
