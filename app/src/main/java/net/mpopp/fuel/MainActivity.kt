@@ -19,12 +19,12 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
-    private var etDate: EditText? = null
-    private var etKilometers: EditText? = null
-    private var etAmountFuel: EditText? = null
-    private var etPriceLiter: EditText? = null
-    private var bnSave: Button? = null
-    private var datePickerDialog: DatePickerDialog? = null
+    private lateinit var etDate: EditText
+    private lateinit var etKilometers: EditText
+    private lateinit var etAmountFuel: EditText
+    private lateinit var etPriceLiter: EditText
+    private lateinit var bnSave: Button
+    private lateinit var datePickerDialog: DatePickerDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         etAmountFuel = findViewById(R.id.etFuelAmount)
         etPriceLiter = findViewById(R.id.etPriceLiter)
         bnSave = findViewById(R.id.bnCSave)
-        bnSave!!.isEnabled = false
+        bnSave.isEnabled = false
 
         val bnReset = findViewById<Button>(R.id.bnReset)
         val dt = LocalDate.now()
@@ -43,14 +43,14 @@ class MainActivity : AppCompatActivity() {
         val currentDate = dt.format(ft)
         Log.d(this.javaClass.simpleName, "currentDate: $currentDate")
 
-        etDate!!.setText(currentDate)
-        etDate!!.setOnClickListener {
+        etDate.setText(currentDate)
+        etDate.setOnClickListener {
             val c: Calendar = Calendar.getInstance()
             var day = c.get(Calendar.DAY_OF_MONTH)
             var month = c.get(Calendar.MONTH)
             var year = c.get(Calendar.YEAR)
 
-            val etDateText: String = etDate!!.text.toString()
+            val etDateText: String = etDate.text.toString()
 
             if (etDateText != "") {
                 day = etDateText.substring(8, 10).toInt()
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog = DatePickerDialog(
                 this@MainActivity,
                 { _, pickedYear, pickedMonth, pickedDayOfMonth ->
-                    etDate!!.setText(
+                    etDate.setText(
                         buildString {
                             append(String.format("%02d", pickedYear))
                             append("-")
@@ -74,20 +74,20 @@ class MainActivity : AppCompatActivity() {
                 month,
                 day
             )
-            datePickerDialog!!.show()
+            datePickerDialog.show()
         }
 
-        etDate!!.addTextChangedListener(textWatcher)
-        etKilometers!!.addTextChangedListener(textWatcher)
-        etAmountFuel!!.addTextChangedListener(textWatcher)
-        etPriceLiter!!.addTextChangedListener(textWatcher)
+        etDate.addTextChangedListener(textWatcher)
+        etKilometers.addTextChangedListener(textWatcher)
+        etAmountFuel.addTextChangedListener(textWatcher)
+        etPriceLiter.addTextChangedListener(textWatcher)
 
-        bnSave!!.setOnClickListener {
+        bnSave.setOnClickListener {
             val intent = Intent(this@MainActivity, ConfirmationActivity::class.java)
-            intent.putExtra("date", etDate!!.text.toString())
-            intent.putExtra("kilometers", etKilometers!!.text.toString())
-            intent.putExtra("fuel_amount", etAmountFuel!!.text.toString())
-            intent.putExtra("price_liter", etPriceLiter!!.text.toString())
+            intent.putExtra("date", etDate.text.toString())
+            intent.putExtra("kilometers", etKilometers.text.toString())
+            intent.putExtra("fuel_amount", etAmountFuel.text.toString())
+            intent.putExtra("price_liter", etPriceLiter.text.toString())
             startActivity(intent)
         }
 
@@ -96,17 +96,17 @@ class MainActivity : AppCompatActivity() {
             val ft1 = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val currentDate1 = dt1.format(ft1)
 
-            etDate!!.setText(currentDate1)
-            etKilometers!!.setText("")
-            etAmountFuel!!.setText("")
-            etPriceLiter!!.setText("")
+            etDate.setText(currentDate1)
+            etKilometers.setText("")
+            etAmountFuel.setText("")
+            etPriceLiter.setText("")
             updateListView()
         }
         updateListView()
     }
 
     private fun updateListView() {
-        val client = HttpClient("https://var.mpopp.net/fuel/app_fuel.php")
+        val client = HttpClient(Config.url)
         val params = mapOf(
             "key" to Config.key,
             "action" to "get_data"
@@ -147,15 +147,15 @@ class MainActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable) {
             // do this after text is changed
-            bnSave!!.isEnabled =
-                etDate!!.text.toString().matches(Regex("^\\d{4}-\\d{2}-\\d{2}$")) &&
-                        etKilometers!!.text.toString()
+            bnSave.isEnabled =
+                etDate.text.toString().matches(Regex("^\\d{4}-\\d{2}-\\d{2}$")) &&
+                        etKilometers.text.toString()
                             .matches(Regex("^\\d+(\\.\\d?)?$")) &&
-                        etAmountFuel!!.text.toString()
+                        etAmountFuel.text.toString()
                             .matches(Regex("^\\d+(\\.\\d{0,2})?$")) &&
-                        etPriceLiter!!.text.toString()
+                        etPriceLiter.text.toString()
                             .matches(Regex("^\\d+(\\.\\d{0,3})?$"))
-            Log.i("afterTextChanged", "bnSave.isEnabled: " + bnSave!!.isEnabled.toString())
+            Log.i("afterTextChanged", "bnSave.isEnabled: " + bnSave.isEnabled.toString())
         }
     }
 

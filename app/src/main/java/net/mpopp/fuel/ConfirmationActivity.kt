@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class ConfirmationActivity : AppCompatActivity() {
-    private var date: String? = null
-    private var kilometers: String? = null
-    private var fuelAmount: String? = null
-    private var priceLiter: String? = null
+    private lateinit var date: String
+    private lateinit var kilometers: String
+    private lateinit var fuelAmount: String
+    private lateinit var priceLiter: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +26,10 @@ class ConfirmationActivity : AppCompatActivity() {
         val bnCCancel = findViewById<Button>(R.id.bnCCancel)
 
         val intent = intent
-        date = intent.getStringExtra("date")
-        kilometers = intent.getStringExtra("kilometers")
-        fuelAmount = intent.getStringExtra("fuel_amount")
-        priceLiter = intent.getStringExtra("price_liter")
+        date = intent.getStringExtra("date").toString()
+        kilometers = intent.getStringExtra("kilometers").toString()
+        fuelAmount = intent.getStringExtra("fuel_amount").toString()
+        priceLiter = intent.getStringExtra("price_liter").toString()
 
         tvCDate.text = "Date: $date"
         tvCKilometers.text = "Kilometers: $kilometers"
@@ -39,14 +39,14 @@ class ConfirmationActivity : AppCompatActivity() {
             resources.getString(R.string.price_per_liter_in_eur) + ": " + priceLiter
 
         bnCSave!!.setOnClickListener {
-            val client = HttpClient("https://var.mpopp.net/fuel/app_fuel.php")
+            val client = HttpClient(Config.url)
             val params = mapOf(
                 "key" to Config.key,
                 "action" to "insert_data",
-                "date" to date!!,
-                "kilometers" to kilometers!!,
-                "fuel_amount" to fuelAmount!!,
-                "price_liter" to priceLiter!!
+                "date" to date,
+                "kilometers" to kilometers,
+                "fuel_amount" to fuelAmount,
+                "price_liter" to priceLiter
             )
 
             client.post(params, object : HttpClient.Callback {
